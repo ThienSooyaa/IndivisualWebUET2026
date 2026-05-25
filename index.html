@@ -835,8 +835,34 @@
     .project-grid,.grid-4,.two-col{gap:12px}
   }
 </style>
+
+<style>
+.light-mode{
+--bg:#f5f5f5;--bg-2:#fff;--panel:rgba(255,255,255,.9);--text:#111;--muted:#555;
+background:linear-gradient(180deg,#fafafa,#e8e8e8)!important;color:#111!important;
+}
+.animated-title{
+background:linear-gradient(90deg,#ffd24a,#ff2b2b,#ffd24a);
+-webkit-background-clip:text;color:transparent;
+background-size:200% auto;
+animation:shineText 4s linear infinite;
+}
+@keyframes shineText{
+to{background-position:200% center;}
+}
+#loveBox{
+display:none;
+margin-top:18px;
+padding:15px;border-radius:15px;
+background:linear-gradient(135deg,#ff6b6b33,#ffd24a33);
+border:1px solid rgba(255,255,255,.1);
+animation:floaty 2s ease-in-out infinite alternate;
+}
+@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+</style>
 </head>
 <body>
+<button id="themeToggle" style="position:fixed;left:18px;bottom:18px;z-index:999;padding:12px;border-radius:15px;border:none;cursor:pointer">🌙</button>
   <a class="to-top" href="#top" aria-label="Lên đầu trang">↑</a>
 
   <div class="app" id="top">
@@ -1432,8 +1458,7 @@ margin-bottom:10px;
     <button id="logoutBtn" class="auth-btn">
         Đăng xuất
     </button>
-</div>
-
+</div><div id="loveBox">💌 Chế độ lời yêu thương đã mở. Hãy gửi điều bạn muốn nói với người ấy ✨<br><input id="loveInput" placeholder="Nhập lời nhắn..." style="width:100%;margin-top:8px;padding:8px;border-radius:10px"><p id="lovePreview"></p></div>
 <script type="module">
 
 import { initializeApp }
@@ -1518,6 +1543,22 @@ logoutBtn.style.display="none";
 
 });
 
+</script>
+
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
+const h=document.querySelector('h1');
+if(h) h.classList.add('animated-title');
+const btn=document.getElementById('themeToggle');
+btn.onclick=()=>{
+document.body.classList.toggle('light-mode');
+btn.innerText=document.body.classList.contains('light-mode')?'☀️':'🌙';
+}
+const input=document.getElementById('loveInput');
+if(input){
+input.oninput=()=>document.getElementById('lovePreview').innerText='❤️ '+input.value;
+}
+});
 </script>
 </body>
 </html>
