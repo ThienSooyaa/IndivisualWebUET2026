@@ -144,7 +144,9 @@
     padding:12px;
     overflow:auto;
     flex:1;
+    scrollbar-width:none;
   }
+  .nav::-webkit-scrollbar{display:none}
   .nav-group{
     font-size:11px;
     letter-spacing:.18em;
@@ -837,10 +839,6 @@
 </style>
 
 <style>
-.light-mode{
---bg:#f5f5f5;--bg-2:#fff;--panel:rgba(255,255,255,.9);--text:#111;--muted:#555;
-background:linear-gradient(180deg,#fafafa,#e8e8e8)!important;color:#111!important;
-}
 .animated-title{
 background:linear-gradient(90deg,#ffd24a,#ff2b2b,#ffd24a);
 -webkit-background-clip:text;color:transparent;
@@ -850,19 +848,86 @@ animation:shineText 4s linear infinite;
 @keyframes shineText{
 to{background-position:200% center;}
 }
-#loveBox{
-display:none;
-margin-top:18px;
-padding:15px;border-radius:15px;
-background:linear-gradient(135deg,#ff6b6b33,#ffd24a33);
-border:1px solid rgba(255,255,255,.1);
-animation:floaty 2s ease-in-out infinite alternate;
+
+/* GitHub Auth compact */
+.gh-auth-wrap{
+  margin-top:14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  overflow:hidden;
 }
-@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+.gh-auth-head{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  cursor:pointer;
+  color:#c5ccdf;
+  font-size:12px;
+  font-weight:600;
+  transition:.2s ease;
+  user-select:none;
+}
+.gh-auth-head:hover{background:rgba(255,255,255,.05)}
+.gh-auth-head svg:first-child{opacity:.7}
+.gh-auth-head span{flex:1}
+.gh-chevron{transition:transform .25s ease;opacity:.5}
+.gh-auth-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease;
+  padding:0 12px;
+}
+.gh-auth-body.open{
+  max-height:180px;
+  padding:0 12px 12px;
+}
+.auth-btn{
+  display:block;
+  width:100%;
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:12px;
+  transition:.2s ease;
+  background:rgba(36,41,46,.9);
+  color:#fff;
+  margin-top:6px;
+}
+.auth-btn:hover{background:rgba(60,70,80,.9);transform:translateY(-1px)}
+.auth-btn.logout{background:rgba(180,0,24,.7)}
+.auth-btn.logout:hover{background:rgba(220,0,30,.8)}
+
+/* Social links */
+.social-links{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+  justify-content:center;
+}
+.social-btn{
+  width:36px;height:36px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);
+  color:#c5ccdf;
+  transition:.22s ease;
+  flex:0 0 auto;
+}
+.social-btn svg{width:16px;height:16px}
+.social-btn:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.18)}
+.social-btn.fb:hover{background:rgba(24,119,242,.2);color:#4a9eff;border-color:rgba(24,119,242,.3)}
+.social-btn.gh:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
+.social-btn.gm:hover{background:rgba(219,68,55,.2);color:#ff7b72;border-color:rgba(219,68,55,.3)}
+.social-btn.ph:hover{background:rgba(82,255,168,.15);color:#52ffa8;border-color:rgba(82,255,168,.25)}
 </style>
 </head>
 <body>
-<button id="themeToggle" style="position:fixed;left:18px;bottom:18px;z-index:999;padding:12px;border-radius:15px;border:none;cursor:pointer">🌙</button>
   <a class="to-top" href="#top" aria-label="Lên đầu trang">↑</a>
 
   <div class="app" id="top">
@@ -891,13 +956,43 @@ animation:floaty 2s ease-in-out infinite alternate;
       </nav>
 
       <div class="sidebar-foot">
-        Học phần: <strong>VNU1001_E252015	</strong><br>
-        Năm học: <strong>2025–2026</strong><br>
-        Mục tiêu: gọn, rõ, hiện đại, dễ đọc trên mọi màn hình.
+        Học phần: <strong>VNU1001_E252015</strong><br>
+        Năm học: <strong>2025–2026</strong>
         <div class="mini">
           <span class="mini-chip">Neon Red</span>
           <span class="mini-chip">Gold</span>
           <span class="mini-chip">Glass UI</span>
+        </div>
+
+        <!-- GitHub Auth gọn -->
+        <div class="gh-auth-wrap">
+          <div class="gh-auth-head" id="ghAuthToggle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.547 1.376.203 2.394.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            <span id="ghAuthLabel">GitHub Login</span>
+            <svg class="gh-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="gh-auth-body" id="ghAuthBody">
+            <img id="avatar" style="width:48px;height:48px;border-radius:50%;display:none;margin:8px auto 6px;border:2px solid rgba(255,210,74,.4)">
+            <div id="username" style="font-size:12px;color:#cfd5e8;text-align:center;margin-bottom:8px">Chưa đăng nhập</div>
+            <button id="loginBtn" class="auth-btn">🐙 Đăng nhập</button>
+            <button id="logoutBtn" class="auth-btn logout" style="display:none">Đăng xuất</button>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links">
+          <a href="https://www.facebook.com/luong.khanhthien.39" target="_blank" class="social-btn fb" title="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://github.com/ThienSooyaa" target="_blank" class="social-btn gh" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.547 1.376.203 2.394.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          </a>
+          <a href="mailto:Yeuchijisoo2007@gmail.com" class="social-btn gm" title="Gmail">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+          </a>
+          <a href="tel:0826862007" class="social-btn ph" title="0826862007">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </a>
         </div>
       </div>
     </aside>
@@ -1403,62 +1498,7 @@ animation:floaty 2s ease-in-out infinite alternate;
     toTop.style.transform = window.scrollY > 300 ? 'translateY(0)' : 'translateY(4px)';
   });
 </script>
-<style>
-#authBox{
-position:fixed;
-right:20px;
-top:20px;
-z-index:99999;
-background:rgba(20,20,30,.95);
-padding:14px;
-border-radius:16px;
-border:1px solid rgba(255,255,255,.1);
-color:white;
-text-align:center;
-}
 
-.auth-btn{
-padding:10px 16px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-margin-top:8px;
-font-weight:bold;
-}
-
-#loginBtn{
-background:#24292e;
-color:white;
-}
-
-#logoutBtn{
-background:#c62828;
-color:white;
-display:none;
-}
-
-#avatar{
-width:70px;
-height:70px;
-border-radius:50%;
-display:none;
-margin:auto;
-margin-bottom:10px;
-}
-</style>
-
-<div id="authBox">
-    <img id="avatar">
-    <div id="username">Chưa đăng nhập</div>
-
-    <button id="loginBtn" class="auth-btn">
-        🐙 Đăng nhập GitHub
-    </button>
-
-    <button id="logoutBtn" class="auth-btn">
-        Đăng xuất
-    </button>
-</div><div id="loveBox">💌 Chế độ lời yêu thương đã mở. Hãy gửi điều bạn muốn nói với người ấy ✨<br><input id="loveInput" placeholder="Nhập lời nhắn..." style="width:100%;margin-top:8px;padding:8px;border-radius:10px"><p id="lovePreview"></p></div>
 <script type="module">
 
 import { initializeApp }
@@ -1547,17 +1587,18 @@ logoutBtn.style.display="none";
 
 <script>
 window.addEventListener('DOMContentLoaded',()=>{
-const h=document.querySelector('h1');
-if(h) h.classList.add('animated-title');
-const btn=document.getElementById('themeToggle');
-btn.onclick=()=>{
-document.body.classList.toggle('light-mode');
-btn.innerText=document.body.classList.contains('light-mode')?'☀️':'🌙';
-}
-const input=document.getElementById('loveInput');
-if(input){
-input.oninput=()=>document.getElementById('lovePreview').innerText='❤️ '+input.value;
-}
+  const h=document.querySelector('h1');
+  if(h) h.classList.add('animated-title');
+
+  // GitHub auth toggle accordion
+  const toggle = document.getElementById('ghAuthToggle');
+  const body = document.getElementById('ghAuthBody');
+  if(toggle && body){
+    toggle.addEventListener('click', () => {
+      body.classList.toggle('open');
+      toggle.querySelector('.gh-chevron').style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+    });
+  }
 });
 </script>
 </body>
