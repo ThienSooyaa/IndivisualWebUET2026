@@ -904,9 +904,13 @@ to{background-position:200% center;}
 /* Social links */
 .social-links{
   display:flex;
+  flex-direction:column;
   gap:8px;
   margin-top:14px;
-  justify-content:center;
+}
+.social-icons-row{
+  display:flex;
+  gap:8px;
 }
 .social-btn{
   width:36px;height:36px;
@@ -923,8 +927,238 @@ to{background-position:200% center;}
 .social-btn:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.18)}
 .social-btn.fb:hover{background:rgba(24,119,242,.2);color:#4a9eff;border-color:rgba(24,119,242,.3)}
 .social-btn.gh:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
-.social-btn.gm:hover{background:rgba(219,68,55,.2);color:#ff7b72;border-color:rgba(219,68,55,.3)}
-.social-btn.ph:hover{background:rgba(82,255,168,.15);color:#52ffa8;border-color:rgba(82,255,168,.25)}
+
+/* Email & phone info rows */
+.social-info-row{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.social-info-item{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:8px 11px;
+  border-radius:11px;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);
+}
+.social-info-item svg{
+  width:14px;height:14px;
+  flex:0 0 auto;
+}
+.social-info-item span{
+  font-size:11.5px;
+  font-family:"JetBrains Mono",monospace;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.social-info-item.gm{color:#ff7b72;border-color:rgba(219,68,55,.15);background:rgba(219,68,55,.06)}
+.social-info-item.ph{color:#52ffa8;border-color:rgba(82,255,168,.12);background:rgba(82,255,168,.04)}
+
+/* ===== LOVE WALL ===== */
+.love-wall{
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  padding:30px 28px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,43,100,.18), transparent 45%),
+    radial-gradient(circle at 10% 80%, rgba(255,43,43,.12), transparent 40%),
+    linear-gradient(135deg, rgba(14,15,24,.92), rgba(20,12,22,.92));
+  border:1px solid rgba(255,80,120,.15);
+  box-shadow: 0 24px 80px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,150,180,.06);
+  backdrop-filter:blur(16px);
+}
+.love-wall::before{
+  content:"♥";
+  position:absolute;
+  right:24px; top:-10px;
+  font-size:130px;
+  color:rgba(255,43,80,.06);
+  pointer-events:none;
+  line-height:1;
+}
+.love-section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+.love-title{
+  margin:0;
+  font-size:26px;
+  letter-spacing:-.04em;
+  font-family:var(--font-rounded),sans-serif;
+}
+.love-title span{color:#ff6b8a;text-shadow:0 0 20px rgba(255,80,120,.35)}
+.love-tag{
+  font-size:12px;
+  color:#ff9eb5;
+  font-family:"JetBrains Mono",monospace;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+
+/* lock screen khi chưa đăng nhập */
+.love-locked{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  padding:32px 0 18px;
+  text-align:center;
+}
+.love-lock-icon{
+  width:64px;height:64px;
+  border-radius:20px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,rgba(255,43,80,.2),rgba(255,210,74,.12));
+  border:1px solid rgba(255,80,120,.2);
+  font-size:28px;
+}
+.love-locked p{
+  margin:0;
+  color:#b5bdd4;
+  font-size:14px;
+  line-height:1.7;
+  max-width:340px;
+}
+.love-login-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:12px 20px;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,43,80,.3),rgba(255,43,43,.2));
+  border:1px solid rgba(255,80,120,.3);
+  color:#ffb5c8;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.22s ease;
+}
+.love-login-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,43,80,.2)}
+
+/* form gửi tin nhắn */
+.love-form{display:none}
+.love-form.visible{display:block}
+.love-form-inner{
+  display:flex;
+  gap:12px;
+  align-items:flex-end;
+  margin-bottom:24px;
+}
+.love-textarea{
+  flex:1;
+  resize:none;
+  border-radius:16px;
+  border:1px solid rgba(255,80,120,.2);
+  background:rgba(255,255,255,.04);
+  color:#f5f7ff;
+  font-family:var(--font-rounded),sans-serif;
+  font-size:14px;
+  padding:14px 16px;
+  line-height:1.6;
+  outline:none;
+  transition:.2s ease;
+  min-height:80px;
+}
+.love-textarea:focus{
+  border-color:rgba(255,80,120,.45);
+  background:rgba(255,80,120,.05);
+  box-shadow:0 0 0 3px rgba(255,43,80,.08);
+}
+.love-textarea::placeholder{color:#6a7090}
+.love-send-btn{
+  flex:0 0 auto;
+  padding:14px 20px;
+  border-radius:14px;
+  border:none;
+  background:linear-gradient(135deg,#ff2b50,#b40018);
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer;
+  transition:.22s ease;
+  box-shadow:0 10px 28px rgba(255,43,80,.25);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.love-send-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(255,43,80,.35)}
+.love-send-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* danh sách messages */
+.love-messages{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-height:380px;
+  overflow-y:auto;
+  scrollbar-width:none;
+  padding-right:2px;
+}
+.love-messages::-webkit-scrollbar{display:none}
+.love-msg{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,80,120,.08);
+  animation:msgIn .35s ease both;
+}
+@keyframes msgIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.love-msg-avatar{
+  width:36px;height:36px;
+  border-radius:50%;
+  border:2px solid rgba(255,80,120,.3);
+  object-fit:cover;
+  flex:0 0 auto;
+  background:rgba(255,43,80,.2);
+}
+.love-msg-body{flex:1;min-width:0}
+.love-msg-name{
+  font-size:12px;
+  font-weight:700;
+  color:#ff9eb5;
+  margin-bottom:4px;
+}
+.love-msg-text{
+  font-size:14px;
+  color:#dde3f8;
+  line-height:1.65;
+  word-break:break-word;
+}
+.love-msg-time{
+  font-size:11px;
+  color:#5a6080;
+  margin-top:4px;
+  font-family:"JetBrains Mono",monospace;
+}
+.love-empty{
+  text-align:center;
+  padding:28px 0;
+  color:#5a6080;
+  font-size:14px;
+}
+.love-empty-icon{font-size:32px;margin-bottom:8px}
+.love-char-count{
+  font-size:11px;
+  color:#5a6080;
+  text-align:right;
+  margin-top:-18px;
+  margin-bottom:10px;
+  font-family:"JetBrains Mono",monospace;
+}
 </style>
 </head>
 <body>
@@ -981,18 +1215,24 @@ to{background-position:200% center;}
 
         <!-- Social Links -->
         <div class="social-links">
-          <a href="https://www.facebook.com/luong.khanhthien.39" target="_blank" class="social-btn fb" title="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-          <a href="https://github.com/ThienSooyaa" target="_blank" class="social-btn gh" title="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.547 1.376.203 2.394.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-          </a>
-          <a href="mailto:Yeuchijisoo2007@gmail.com" class="social-btn gm" title="Gmail">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-          </a>
-          <a href="tel:0826862007" class="social-btn ph" title="0826862007">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          </a>
+          <div class="social-icons-row">
+            <a href="https://www.facebook.com/luong.khanhthien.39" target="_blank" class="social-btn fb" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://github.com/ThienSooyaa" target="_blank" class="social-btn gh" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.547 1.376.203 2.394.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </a>
+          </div>
+          <div class="social-info-row">
+            <div class="social-info-item gm">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+              <span>Yeuchijisoo2007@gmail.com</span>
+            </div>
+            <div class="social-info-item ph">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <span>0826862007</span>
+            </div>
+          </div>
         </div>
       </div>
     </aside>
@@ -1485,6 +1725,43 @@ to{background-position:200% center;}
         </div>
       </section>
 
+      <!-- LOVE WALL SECTION -->
+      <section class="love-wall" id="love-wall">
+        <div class="love-section-head">
+          <h2 class="love-title">💌 Gửi lời <span>yêu thương</span></h2>
+          <div class="love-tag">Love Wall</div>
+        </div>
+
+        <!-- Locked state -->
+        <div class="love-locked" id="loveLocked">
+          <div class="love-lock-icon">🔒</div>
+          <p>Đăng nhập GitHub để gửi lời nhắn yêu thương lên bức tường này ✨</p>
+          <button class="love-login-btn" id="loveLoginBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.547 1.376.203 2.394.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            Đăng nhập GitHub
+          </button>
+        </div>
+
+        <!-- Form gửi tin (chỉ hiện khi đã đăng nhập) -->
+        <div class="love-form" id="loveForm">
+          <div class="love-form-inner">
+            <textarea id="loveInput" class="love-textarea" maxlength="200" placeholder="Nhập lời nhắn yêu thương của bạn... 💕" rows="3"></textarea>
+            <button class="love-send-btn" id="loveSendBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Gửi
+            </button>
+          </div>
+          <div class="love-char-count"><span id="charCount">0</span>/200</div>
+
+          <div class="love-messages" id="loveMessages">
+            <div class="love-empty">
+              <div class="love-empty-icon">💝</div>
+              <div>Chưa có lời nhắn nào. Hãy là người đầu tiên!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div class="footer">
         Portfolio UET · Rounded Fonts · Glowing Communist Symbols · Personal Dev UI · A Unique Identity.
       </div>
@@ -1501,17 +1778,11 @@ to{background-position:200% center;}
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-
-import {
-getAuth,
-GithubAuthProvider,
-signInWithPopup,
-signOut,
-onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getAuth, GithubAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAEf9u3eXmyZ8XS8F6DTab2fXCJaEV03DE",
@@ -1521,66 +1792,117 @@ const firebaseConfig = {
   messagingSenderId: "994122687012",
   appId: "1:994122687012:web:9ea8a581213e6a6c7f2eb1"
 };
+
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
+const db = getFirestore(app);
 const provider = new GithubAuthProvider();
 
-const loginBtn=document.getElementById("loginBtn");
-const logoutBtn=document.getElementById("logoutBtn");
-const avatar=document.getElementById("avatar");
-const username=document.getElementById("username");
+// ── Auth elements (sidebar) ──
+const loginBtn    = document.getElementById("loginBtn");
+const logoutBtn   = document.getElementById("logoutBtn");
+const avatar      = document.getElementById("avatar");
+const username    = document.getElementById("username");
 
-loginBtn.onclick=async()=>{
+// ── Love wall elements ──
+const loveLocked  = document.getElementById("loveLocked");
+const loveForm    = document.getElementById("loveForm");
+const loveInput   = document.getElementById("loveInput");
+const loveSendBtn = document.getElementById("loveSendBtn");
+const loveMessages= document.getElementById("loveMessages");
+const charCount   = document.getElementById("charCount");
+const loveLoginBtn= document.getElementById("loveLoginBtn");
 
-try{
+// char counter
+loveInput.addEventListener("input", () => {
+  charCount.textContent = loveInput.value.length;
+});
 
-await signInWithPopup(auth,provider);
-
-}catch(error){
-
-alert(error.message);
-
+// login via sidebar or love wall button
+async function doLogin() {
+  try { await signInWithPopup(auth, provider); }
+  catch(e) { alert(e.message); }
 }
+loginBtn.onclick   = doLogin;
+loveLoginBtn.onclick = doLogin;
+logoutBtn.onclick  = () => signOut(auth);
 
+// send message
+loveSendBtn.onclick = async () => {
+  const text = loveInput.value.trim();
+  if (!text) return;
+  const user = auth.currentUser;
+  if (!user) return;
+
+  loveSendBtn.disabled = true;
+  try {
+    await addDoc(collection(db, "loveMessages"), {
+      text,
+      name: user.displayName || user.login || "Ẩn danh",
+      avatarUrl: user.photoURL || "",
+      uid: user.uid,
+      createdAt: serverTimestamp()
+    });
+    loveInput.value = "";
+    charCount.textContent = "0";
+  } catch(e) {
+    alert("Lỗi gửi tin: " + e.message);
+  }
+  loveSendBtn.disabled = false;
 };
 
-logoutBtn.onclick=()=>{
+// realtime messages listener
+const q = query(collection(db, "loveMessages"), orderBy("createdAt", "desc"));
+onSnapshot(q, (snap) => {
+  if (snap.empty) {
+    loveMessages.innerHTML = `
+      <div class="love-empty">
+        <div class="love-empty-icon">💝</div>
+        <div>Chưa có lời nhắn nào. Hãy là người đầu tiên!</div>
+      </div>`;
+    return;
+  }
+  loveMessages.innerHTML = snap.docs.map(doc => {
+    const d = doc.data();
+    const time = d.createdAt?.toDate?.()
+      ? d.createdAt.toDate().toLocaleString("vi-VN", {dateStyle:"short", timeStyle:"short"})
+      : "vừa xong";
+    return `
+      <div class="love-msg">
+        <img class="love-msg-avatar" src="${d.avatarUrl || ''}" onerror="this.src=''" alt="">
+        <div class="love-msg-body">
+          <div class="love-msg-name">${d.name}</div>
+          <div class="love-msg-text">${d.text.replace(/</g,"&lt;")}</div>
+          <div class="love-msg-time">${time}</div>
+        </div>
+      </div>`;
+  }).join("");
+});
 
-signOut(auth);
+// auth state
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // sidebar
+    avatar.src = user.photoURL || "";
+    avatar.style.display = "block";
+    username.innerText = user.displayName || user.email || "GitHub User";
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
 
-};
+    // love wall
+    loveLocked.style.display = "none";
+    loveForm.classList.add("visible");
+  } else {
+    // sidebar
+    avatar.style.display = "none";
+    username.innerText = "Chưa đăng nhập";
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
 
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
-avatar.src=user.photoURL || "";
-
-avatar.style.display="block";
-
-username.innerText=
-user.displayName ||
-user.email ||
-"GitHub User";
-
-loginBtn.style.display="none";
-
-logoutBtn.style.display="inline-block";
-
-}else{
-
-avatar.style.display="none";
-
-username.innerText="Chưa đăng nhập";
-
-loginBtn.style.display="inline-block";
-
-logoutBtn.style.display="none";
-
-}
-
+    // love wall
+    loveLocked.style.display = "flex";
+    loveForm.classList.remove("visible");
+  }
 });
 
 </script>
